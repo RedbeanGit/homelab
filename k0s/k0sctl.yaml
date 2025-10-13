@@ -13,7 +13,7 @@ spec:
       role: controller+worker
       noTaints: true
   k0s:
-    version: 1.34.1
+    version: v1.34.1+k0s.0
   options:
     wait:
       enabled: true
