@@ -7,7 +7,7 @@ spec:
   hosts:
     - ssh:
         address: munchkin0.local
-        user: root
+        user: redbean
         port: 22
         keyPath: ./keys/homelab
       role: controller+worker
