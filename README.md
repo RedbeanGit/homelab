@@ -5,11 +5,13 @@ This repository contains the configuration files and scripts for my personal hom
 Here are the main components (to be updated):
 
 - **k0s**: Kubernetes distribution for managing containerized applications.
+- **Flux**: GitOps tool for continuous deployment.
 
 ## Requirements
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/) - Command-line tool for interacting with Kubernetes clusters.
 - [k0sctl](https://docs.k0sproject.io/stable/install/) - Command-line tool for managing k0s clusters.
+- [flux CLI](https://fluxcd.io/docs/installation/) - Command-line tool for managing GitOps with Flux.
 - SSH access to your servers.
 
 ## How to deploy
@@ -42,4 +44,16 @@ Here are the main components (to be updated):
 
    ```bash
    kubectl get nodes
+   ```
+
+7. Setup Flux in the cluster:
+
+   ```bash
+   export GITHUB_TOKEN=<your_github_token>
+   flux bootstrap github \
+     --owner=RedbeanGit \
+     --repository=homelab \
+     --branch=main \
+     --path=flux/clusters/homelab \
+     --personal
    ```
