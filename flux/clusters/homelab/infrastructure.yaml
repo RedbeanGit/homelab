@@ -13,3 +13,4 @@ spec:
     name: flux-system
   dependsOn:
     - name: namespaces
+    - name: helm-repositories
