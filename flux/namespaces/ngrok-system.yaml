@@ -1,0 +1,5 @@
+kind: Namespace
+metadata:
+  name: ngrok-system
+  labels:
+    name: ngrok-system

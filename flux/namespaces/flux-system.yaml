@@ -1,0 +1,5 @@
+kind: Namespace
+metadata:
+  name: flux-system
+  labels:
+    name: flux-system

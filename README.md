@@ -49,11 +49,11 @@ Here are the main components (to be updated):
 7. Setup Flux in the cluster:
 
    ```bash
-   export GITHUB_TOKEN=<your_github_token>
+   export GITHUB_TOKEN=<your_github_token> # Create a Github token with contents (read/write) and admin (read/write) permissions for the repository
    flux bootstrap github \
      --owner=RedbeanGit \
      --repository=homelab \
      --branch=main \
-     --path=flux/clusters/homelab \
+     --path=flux \
      --personal
    ```
