@@ -49,11 +49,12 @@ Here are the main components (to be updated):
 7. Setup Flux in the cluster:
 
    ```bash
-   export GITHUB_TOKEN=<your_github_token> # Create a Github token with contents (read/write) and admin (read/write) permissions for the repository
-   flux bootstrap github \
-     --owner=RedbeanGit \
-     --repository=homelab \
-     --branch=main \
-     --path=flux \
-     --personal
+   # 1. Install Flux namespace, operator and CRDs
+   kubectl apply -f flux/infrastructure/flux-system/bootstrap.yaml
+   # 2. Create a GitHub deploy key and add it to your repository (you must add it to your Github repo as a deploy key with read access)
+   flux create secret git flux-system
+   # 3. Start synchronizing the cluster with the repository
+   kubectl apply -f flux/clusters/homelab/sync.yaml
    ```
+
+8. Done! Flux will now synchronize the cluster state with the configuration files in this repository.
