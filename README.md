@@ -52,7 +52,7 @@ Here are the main components (to be updated):
    # 1. Install Flux namespace, operator and CRDs
    kubectl apply -f flux/infrastructure/flux-system/bootstrap.yaml
    # 2. Create a GitHub deploy key and add it to your repository (you must add it to your Github repo as a deploy key with read access)
-   flux create secret git flux-system
+   flux create secret git flux-system --url=ssh://git@github.com/RedbeanGit/homelab.git
    # 3. Start synchronizing the cluster with the repository
    kubectl apply -f flux/clusters/homelab/sync.yaml
    ```
