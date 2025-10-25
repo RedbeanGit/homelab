@@ -1,0 +1,28 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: ensure-namespace-defined
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: ["*"]
+        apiVersions: ["*"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["*"]
+        scope: "Namespaced"
+  validations:
+    - expression: "has(object.metadata.namespace) && object.metadata.namespace != ''"
+      message: "Namespace must be defined for namespaced resources"
+      reason: Invalid
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: ensure-namespace-defined-binding
+spec:
+  policyName: ensure-namespace-defined
+  validationActions: ["Deny"]
+  matchResources:
+    namespaceSelector: {}

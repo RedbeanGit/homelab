@@ -1,15 +1,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: ngrok-operator
+  name: validating-admission-policies
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./flux/infrastructure/ngrok-operator
-  targetNamespace: ngrok-system
+  path: ./flux/infrastructure/validating-admission-policies
   prune: true
   sourceRef:
     kind: GitRepository
     name: homelab
-  dependsOn:
-    - name: validating-admission-policies
