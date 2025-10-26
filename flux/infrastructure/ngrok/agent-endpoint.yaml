@@ -1,0 +1,9 @@
+apiVersion: ngrok.k8s.ngrok.com/v1alpha1
+kind: AgentEndpoint
+metadata:
+  name: kubernetes-api-endpoint
+spec:
+  url: https://${ngrok_domain}
+  upstream:
+    url: http://kubernetes.default.svc:443
+  description: "Kubernetes API Server exposed via ngrok"

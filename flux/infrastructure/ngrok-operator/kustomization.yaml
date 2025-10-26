@@ -5,4 +5,5 @@ configurations:
 resources:
   - helm-release.yaml
   - role-binding.yaml
+  - secret.yaml
   - service-account.yaml

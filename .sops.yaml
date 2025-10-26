@@ -1,0 +1,6 @@
+creation_rules:
+  - path_regex: flux/clusters/.*/config/.*\.ya?ml
+    age:
+      - age1fe4qsmk5psclxsct8fmq5lenama3zt7vt35arsxqslxlskcp9pjsup39qj
+      - age127w6kw60q0qgm4364r2slw38fvqtz7fyn3sy2vjy0srr6fvf0f9shpekq0
+    encrypted_regex: "^(data|stringData)$"
