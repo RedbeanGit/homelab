@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: homelab
   dependsOn:
-    - name: homelab
+    - name: config
     - name: validating-admission-policies
   postBuild:
     substituteFrom:
