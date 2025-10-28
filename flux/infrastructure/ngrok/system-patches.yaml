@@ -17,7 +17,6 @@ spec:
         kind: Service
         name: kubernetes
         namespace: default
-      patchType: json6902
       patch: |
         - op: add
           path: /metadata/annotations
