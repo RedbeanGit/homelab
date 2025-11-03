@@ -5,4 +5,4 @@ resources:
   - kyverno.yaml
   - ngrok-operator.yaml
   - ngrok.yaml
-  - validating-admission-policies.yaml
+  - policies.yaml
