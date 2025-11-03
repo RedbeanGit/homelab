@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: policies
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./flux/infrastructure/policies
+  components:
+    - ./components/require-namespace
+  prune: true
+  dependsOn:
+    - name: kyverno
+  sourceRef:
+    kind: GitRepository
+    name: homelab

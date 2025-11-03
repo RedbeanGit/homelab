@@ -13,7 +13,7 @@ spec:
     name: homelab
   dependsOn:
     - name: config
-    - name: validating-admission-policies
+    - name: policies
   postBuild:
     substituteFrom:
       - kind: Secret

@@ -1,0 +1,40 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-namespace
+spec:
+  validationFailureAction: enforce
+  background: false
+  rules:
+    - name: require-namespace-field
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+                - Deployment
+                - Service
+                - ConfigMap
+                - Secret
+                - ReplicaSet
+                - StatefulSet
+                - DaemonSet
+                - Job
+                - CronJob
+                - Role
+                - RoleBinding
+                - NetworkPolicy
+      preconditions:
+        all:
+          # Ignore cluster-scoped resources
+          - key: "{{ request.object.metadata.namespace || '' }}"
+            operator: Equals
+            value: ""
+      validate:
+        message: "A namespace must be defined in metadata.namespace."
+        deny:
+          conditions:
+            all:
+              - key: "{{ request.object.metadata.namespace || '' }}"
+                operator: Equals
+                value: ""
