@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ../../../helm-repositories/kyverno.yaml
   - ../../../helm-repositories/ngrok.yaml
+  - ../../../helm-repositories/prometheus-community.yaml
