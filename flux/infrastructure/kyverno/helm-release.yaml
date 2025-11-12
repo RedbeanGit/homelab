@@ -23,3 +23,13 @@ spec:
       retries: 3
   test:
     enable: true
+  values:
+    admissionController:
+      container:
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
