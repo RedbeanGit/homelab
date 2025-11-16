@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
     - ssh:
-        address: munchkin0.local
+        address: munchkin0.internal
         user: redbean
         port: 22
         keyPath: ./keys/homelab
