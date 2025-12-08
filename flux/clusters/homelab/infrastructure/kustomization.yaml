@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - flux-system.yaml
-  # - kube-prometheus-stack.yaml
+  - kube-prometheus-stack.yaml
   - kyverno.yaml
   - ngrok-operator.yaml
   - ngrok.yaml
