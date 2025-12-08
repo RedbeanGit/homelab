@@ -99,7 +99,7 @@ Here are the main components (to be updated):
 7. Save and commit the changes to the repository.
 
    ```bash
-   git add flux/clusters/homelab/cluster-secret-vars.yaml
+   git add flux/clusters/homelab/config/cluster-secret-vars.yaml
    git commit -m "chore: update cluster secret vars"
    git push origin main
    ```
