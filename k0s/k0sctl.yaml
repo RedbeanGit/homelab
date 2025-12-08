@@ -12,6 +12,13 @@ spec:
         keyPath: ./keys/homelab
       role: controller+worker
       noTaints: true
+    - ssh:
+        address: munchkin1.internal
+        user: redbean
+        port: 22
+        keyPath: ./keys/homelab
+      role: controller+worker
+      noTaints: true
   k0s:
     version: v1.34.1+k0s.0
   options:
