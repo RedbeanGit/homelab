@@ -3,7 +3,7 @@ kind: Kustomization
 configurations:
   - kustomize/namespace.yaml
 resources:
+  - cluster-role-binding.yaml
   - helm-release.yaml
-  - role-binding.yaml
   - secret.yaml
   - service-account.yaml
