@@ -1,0 +1,7 @@
+**/.git
+**/.DS_Store
+**/.idea
+**/node_modules
+**/target
+**/*.log
+Dockerfile
