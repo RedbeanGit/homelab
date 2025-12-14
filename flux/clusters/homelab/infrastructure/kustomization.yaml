@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - flux-system.yaml
   - kube-prometheus-stack.yaml
-  - kyverno.yaml
+  # - kyverno.yaml
   - ngrok-operator.yaml
   - ngrok.yaml
   - policies.yaml
