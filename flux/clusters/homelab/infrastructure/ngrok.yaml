@@ -14,8 +14,6 @@ spec:
   dependsOn:
     - name: config
     - name: ngrok-operator
-    - name: kyverno
-    - name: policies
   postBuild:
     substituteFrom:
       - kind: Secret

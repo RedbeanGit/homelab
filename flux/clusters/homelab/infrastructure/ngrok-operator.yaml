@@ -13,7 +13,6 @@ spec:
     name: homelab
   dependsOn:
     - name: config
-    - name: policies
   postBuild:
     substituteFrom:
       - kind: Secret
