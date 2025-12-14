@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: papermc
+  labels:
+    app: papermc
+spec:
+  clusterIP: None
+  selector:
+    app: papermc
+  ports:
+    - name: minecraft
+      port: 25565
+      targetPort: 25565
+    - name: rcon
+      port: 25575
+      targetPort: 25575

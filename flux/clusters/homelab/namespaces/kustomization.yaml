@@ -5,3 +5,4 @@ resources:
   - kyverno.yaml
   - monitoring.yaml
   - ngrok-system.yaml
+  - papermc.yaml
