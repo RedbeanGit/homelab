@@ -3,13 +3,14 @@ set -eu
 
 # Default values
 : ${EULA:=true}
-: ${PAPER_JAR:=/opt/papermc/paper.jar}
 : ${JAVA_OPTS:="-Xms1G -Xmx2G"}
 : ${PROPERTIES_DIFFICULTY:="normal"}
 : ${PROPERTIES_ENABLE_RCON:=false}
 : ${PROPERTIES_GAMEMODE:="survival"}
 : ${PROPERTIES_MAX_PLAYERS:="20"}
 : ${PROPERTIES_MOTD:="A PaperMC Server"}
+
+PAPERMC_STATIC_FOLDER="/opt/papermc"
 
 print_env() {
   echo "Starting PaperMC ${PAPER_VERSION} with JVM options: ${JAVA_OPTS}"
@@ -25,7 +26,7 @@ ensure_eula() {
 ensure_paper() {
   if [ ! -f /data/paper.jar ]; then
     echo "Copying paper jar to /data/paper.jar"
-    cp ${PAPER_JAR} /data/paper.jar
+    cp ${PAPER_STATIC_FOLDER}/paper.jar /data/paper.jar
     chmod 644 /data/paper.jar
   fi
 }
@@ -34,17 +35,17 @@ ensure_paper() {
 ensure_configs() {
   if [ ! -f /data/paper.yml ]; then
     echo "Copying default paper.yml to /data/paper.yml"
-    cp /data/paper.yml /data/paper.yml
+    cp ${PAPER_STATIC_FOLDER}/paper.yml /data/paper.yml
     chmod 644 /data/paper.yml
   fi
   if [ ! -f /data/spigot.yml ]; then
     echo "Copying default spigot.yml to /data/spigot.yml"
-    cp /data/spigot.yml /data/spigot.yml
+    cp ${PAPER_STATIC_FOLDER}/spigot.yml /data/spigot.yml
     chmod 644 /data/spigot.yml
   fi
   if [ ! -f /data/server.properties ]; then
     echo "Copying default server.properties to /data/server.properties"
-    cp /data/server.properties /data/server.properties
+    cp ${PAPER_STATIC_FOLDER}/server.properties /data/server.properties
     chmod 644 /data/server.properties
   fi
 }
