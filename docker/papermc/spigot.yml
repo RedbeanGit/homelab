@@ -1,0 +1,16 @@
+settings:
+  debug: false
+
+world-settings:
+  default:
+    mob-spawn-range: 6
+    entity-activation-range:
+      animals: 24
+      monsters: 24
+      raiders: 32
+      misc: 16
+    ticks-per:
+      hopper: 8
+    merge-radius:
+      item: 3.5
+      exp: 3.5

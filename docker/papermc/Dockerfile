@@ -21,7 +21,7 @@ LABEL org.opencontainers.image.title="papermc-server" \
       org.opencontainers.image.description="PaperMC Minecraft server (pinned build)" \
       org.opencontainers.image.version="${PAPER_VERSION}"
 ENV PAPER_VERSION=${PAPER_VERSION}
-ENV PAPER_JAR=/opt/papermc/paper.jar
+ENV PAPER_STATIC_FOLDER=/opt/papermc
 ENV JAVA_OPTS="-Xms1G -Xmx2G"
 
 # Create non-root user and directories
@@ -30,8 +30,9 @@ RUN groupadd -g 1000 minecraft \
   && mkdir -p /opt/papermc /data \
   && chown -R minecraft:minecraft /opt/papermc /data
 
-COPY --from=downloader /tmp/paper-${PAPER_VERSION}.jar ${PAPER_JAR}
-RUN chown minecraft:minecraft ${PAPER_JAR} && chmod 644 ${PAPER_JAR}
+COPY --from=downloader /tmp/paper-${PAPER_VERSION}.jar ${PAPER_STATIC_FOLDER}/paper.jar
+COPY server.properties paper.yml spigot.yml ${PAPER_STATIC_FOLDER}/
+RUN chown minecraft:minecraft ${PAPER_STATIC_FOLDER}/* && chmod 644 ${PAPER_STATIC_FOLDER}/paper.jar
 
 # Add entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

@@ -1,0 +1,13 @@
+settings:
+  async-chunks:
+    enable: true
+
+world-settings:
+  default:
+    view-distance: 8
+    simulation-distance: 6
+    max-auto-save-chunks-per-tick: 6
+    optimize-explosions: true
+    tick-inactive-villagers: false
+    use-faster-eigencraft-redstone: true
+    per-player-mob-spawn: true
