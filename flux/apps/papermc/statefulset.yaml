@@ -27,7 +27,20 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: JAVA_OPTS
-              value: "-Xms4G -Xmx6G"
+              value: >
+                -Xms2G -Xmx6G -XX:+UseG1GC -XX:+ParallelRefProcEnabled
+                -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions
+                -XX:+DisableExplicitGC -XX:+AlwaysPreTouch
+                -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40
+                -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20
+                -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4
+                -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90
+                -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32
+                -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1
+            - name: PROPERTIES_ENABLE_RCON
+              value: "true"
+            - name: PROPERTIES_MOTD
+              value: "Welcome to the Redbean Server!"
           ports:
             - name: minecraft
               containerPort: 25565
@@ -53,10 +66,10 @@ spec:
           resources:
             requests:
               cpu: "2"
-              memory: "6Gi"
+              memory: "2Gi"
             limits:
               cpu: "6"
-              memory: "8Gi"
+              memory: "6Gi"
   volumeClaimTemplates:
     - metadata:
         name: data
