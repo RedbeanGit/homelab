@@ -75,7 +75,7 @@ update_properties() {
       sed -i "s/^max-players=.*/max-players=${PROPERTIES_MAX_PLAYERS}/" /data/server.properties
     fi
   fi
-  if ! grep -q "^motd=" /data/server.properties; then
+  if [ -n "${PROPERTIES_MOTD}" ]; then
     echo "Setting MOTD in server.properties"
     sed -i "s/^motd=.*/motd=${PROPERTIES_MOTD}/" /data/server.properties
   fi
