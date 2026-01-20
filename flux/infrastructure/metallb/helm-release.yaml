@@ -25,5 +25,6 @@ spec:
     enable: true
   values:
     prometheus:
+      serviceAccount: kube-prometheus-stack-prometheus
       serviceMonitor:
         enabled: true
