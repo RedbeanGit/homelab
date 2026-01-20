@@ -25,6 +25,8 @@ spec:
         - name: hytale
           image: indifferentbroccoli/hytale-server-docker:v1.0.5
           imagePullPolicy: IfNotPresent
+          tty: true
+          stdin: true
           env:
             - name: PUID
               value: "1000"
@@ -62,7 +64,7 @@ spec:
                 - sh
                 - -c
                 - "echo > /dev/udp/127.0.0.1/5520"
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 20
             failureThreshold: 10
           resources:
