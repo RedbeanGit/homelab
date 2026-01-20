@@ -48,14 +48,20 @@ spec:
             - name: hytale-backups
               mountPath: /backups
           readinessProbe:
-            udpSocket:
-              port: 5520
+            exec:
+              command:
+                - sh
+                - -c
+                - "echo > /dev/udp/127.0.0.1/5520"
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 3
           livenessProbe:
-            udpSocket:
-              port: 5520
+            exec:
+              command:
+                - sh
+                - -c
+                - "echo > /dev/udp/127.0.0.1/5520"
             initialDelaySeconds: 60
             periodSeconds: 20
             failureThreshold: 10
