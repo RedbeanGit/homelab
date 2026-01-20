@@ -5966,6 +5966,7 @@ spec:
         - --log-level=info
         - --log-encoding=json
         - --enable-leader-election
+        - --feature-gates=StrictPostBuildSubstitutions=true
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
