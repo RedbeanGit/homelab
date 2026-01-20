@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - flux-system.yaml
   - kube-prometheus-stack.yaml
+  - metallb.yaml
   - ngrok-operator.yaml
   - ngrok.yaml
