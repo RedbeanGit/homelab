@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hytale
+  labels:
+    app: hytale
+spec:
+  type: LoadBalancer
+  selector:
+    app: hytale
+  ports:
+    - name: hytale
+      port: 5520
+      targetPort: 5520

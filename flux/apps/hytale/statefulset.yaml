@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hytale
+  labels:
+    app: hytale
+spec:
+  automountServiceAccountToken: false
+  serviceName: hytale
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hytale
+  template:
+    metadata:
+      labels:
+        app: hytale
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: hytale
+          image: indifferentbroccoli/hytale-server-docker:v1.0.5
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: ENABLE_BACKUPS
+              value: "true"
+            - name: BACKUP_DIR
+              value: "/backups"
+            - name: MIN_MEMORY
+              value: "4G"
+            - name: MAX_MEMORY
+              value: "8G"
+          ports:
+            - name: hytale
+              containerPort: 5520
+              protocol: UDP
+          volumeMounts:
+            - name: hytale-data
+              mountPath: /home/hytale/server-files
+            - name: hytale-backups
+              mountPath: /backups
+          readinessProbe:
+            udpSocket:
+              port: 5520
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            udpSocket:
+              port: 5520
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            failureThreshold: 10
+          resources:
+            requests:
+              cpu: "2"
+              memory: "4Gi"
+            limits:
+              cpu: "6"
+              memory: "8Gi"
+  volumeClaimTemplates:
+    - metadata:
+        name: hytale-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 20Gi
+    - metadata:
+        name: hytale-backups
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
