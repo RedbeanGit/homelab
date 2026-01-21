@@ -35,7 +35,11 @@ spec:
             - name: MIN_MEMORY
               value: "8G"
             - name: MAX_MEMORY
-              value: "10G"
+              value: "12G"
+            - name: VIEW_DISTANCE
+              value: "8"
+            - name: MAX_PLAYERS
+              value: "10"
           ports:
             - name: hytale
               containerPort: 5520
@@ -51,7 +55,7 @@ spec:
               memory: "8Gi"
             limits:
               cpu: "6"
-              memory: "10Gi"
+              memory: "12Gi"
   volumeClaimTemplates:
     - metadata:
         name: hytale-data
