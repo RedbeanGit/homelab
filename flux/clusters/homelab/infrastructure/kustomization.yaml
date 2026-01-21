@@ -6,4 +6,4 @@ resources:
   - metallb-ip-pools.yaml
   - metallb.yaml
   - ngrok-operator.yaml
-  - ngrok.yaml
+  # - ngrok.yaml
