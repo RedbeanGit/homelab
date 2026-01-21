@@ -45,24 +45,6 @@ spec:
               mountPath: /home/hytale/server-files
             - name: hytale-backups
               mountPath: /backups
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - "echo > /dev/udp/127.0.0.1/5520"
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 3
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - "echo > /dev/udp/127.0.0.1/5520"
-            initialDelaySeconds: 120
-            periodSeconds: 20
-            failureThreshold: 10
           resources:
             requests:
               cpu: "2"
