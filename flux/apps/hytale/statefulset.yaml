@@ -18,8 +18,6 @@ spec:
     spec:
       automountServiceAccountToken: false
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
         fsGroup: 1000
       containers:
         - name: hytale
@@ -38,8 +36,6 @@ spec:
               value: "4G"
             - name: MAX_MEMORY
               value: "8G"
-            - name: DOWNLOAD_ON_START
-              value: "false"
           ports:
             - name: hytale
               containerPort: 5520
