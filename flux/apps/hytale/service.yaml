@@ -12,3 +12,4 @@ spec:
     - name: hytale
       port: 5520
       targetPort: 5520
+      protocol: UDP
