@@ -33,9 +33,9 @@ spec:
             - name: BACKUP_DIR
               value: "/backups"
             - name: MIN_MEMORY
-              value: "4G"
-            - name: MAX_MEMORY
               value: "8G"
+            - name: MAX_MEMORY
+              value: "10G"
           ports:
             - name: hytale
               containerPort: 5520
@@ -48,10 +48,10 @@ spec:
           resources:
             requests:
               cpu: "2"
-              memory: "4Gi"
+              memory: "8Gi"
             limits:
               cpu: "6"
-              memory: "8Gi"
+              memory: "10Gi"
   volumeClaimTemplates:
     - metadata:
         name: hytale-data
