@@ -1,3 +1,0 @@
-namespace:
-  - kind: ClusterRoleBinding
-    path: /subjects/namespace
