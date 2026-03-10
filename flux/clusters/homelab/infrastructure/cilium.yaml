@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: kube-prometheus-stack
+  name: cilium
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./flux/infrastructure/kube-prometheus-stack
+  path: ./flux/infrastructure/cilium
   targetNamespace: kube-system
   prune: true
   wait: true
