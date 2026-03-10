@@ -16,3 +16,5 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-vars
+  dependsOn:
+    - name: metallb-ip-pools
