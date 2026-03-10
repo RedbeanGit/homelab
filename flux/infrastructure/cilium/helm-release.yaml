@@ -26,6 +26,12 @@ spec:
   values:
     envoy:
       enabled: false
-    kubeProxyReplacement: true
+    ipam:
+      mode: kubernetes
+    ipv4:
+      enabled: true
+    ipv6:
+      enabled: true
     k8sServiceHost: "${kubeapi_server_host}"
     k8sServicePort: ${kubeapi_server_port:=6443}
+    kubeProxyReplacement: true
