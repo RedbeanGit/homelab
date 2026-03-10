@@ -1,12 +1,6 @@
-# Redbean Homelab
+# Redbean's Homelab Kubernetes Cluster
 
-This repository contains the configuration files and scripts for my personal homelab setup.
-
-Here are the main components (to be updated):
-
-- **k0s**: Kubernetes distribution for managing containerized applications.
-- **Flux**: GitOps tool for continuous deployment.
-- **Sops/Age**: Tools for managing secrets in a secure way.
+This repository contains the configuration and setup for Redbean's homelab Kubernetes cluster. The cluster is managed using k0s, with Cilium for networking and security, Sops for secrets management, and Flux for GitOps-based deployment.
 
 ## Requirements
 
@@ -14,6 +8,7 @@ Here are the main components (to be updated):
 - [k0sctl](https://docs.k0sproject.io/stable/install/) - Command-line tool for managing k0s clusters.
 - [flux CLI](https://fluxcd.io/docs/installation/) - Command-line tool for managing GitOps with Flux.
 - [Sops](https://github.com/mozilla/sops) - Tool for managing secrets using YAML, JSON, and ENV files.
+- [Cilium CLI](https://docs.cilium.io/en/stable/gettingstarted/cilium-cli/) - Command-line tool for managing Cilium, a Kubernetes networking and security solution. Can also be installed using Homebrew on Linux and MacOS.
 - SSH access to your servers.
 
 ## How to deploy
@@ -34,7 +29,7 @@ Here are the main components (to be updated):
 4. Deploy the k0s cluster using k0sctl:
 
    ```bash
-   k0sctl apply --config k0s/k0sctl.yaml
+   k0sctl apply --config k0s/k0sctl.yaml --no-wait
    ```
 
 5. Gain access to the cluster:
@@ -50,31 +45,46 @@ Here are the main components (to be updated):
    kubectl get nodes
    ```
 
-### 2. Sops Setup
+### 2. Cilium Setup
+
+1. Install Cilium CLI on your local machine (if you haven't already):
+
+   ```bash
+   brew install cilium-cli
+   ```
+
+2. Install Cilium on the cluster:
+
+   ```bash
+   cilium install --helm-values cilium/values.yaml
+   ```
+
+3. Verify Cilium is running (it may take a few minutes for all components to be up):
+
+   ```bash
+   cilium status
+   ```
+
+### 3. Sops Setup
 
 1. Install Sops on your local machine if you haven't already.
 
-2. Create an Age key pair for encrypting/decrypting secrets:
+2. Create a personal Age key pair for encrypting/decrypting secrets:
 
    ```bash
-   # Generate a new Age key pair for personal use
-   age-keygen -o age-personal.key
-   # Generate a new Age key pair for the cluster
-   age-keygen -o age-homelab.key
-   ```
-
-3. Move the personal age key to the default Sops location for easier access:
-
-   ```bash
-   # If it's the first time, create the directory and move the key
+   # If you don't already have one, generate a new Age key pair for personal use
    mkdir -p ~/.config/sops/age
-   mv age-personal.key ~/.config/sops/age/keys.txt
-   # Otherwise, append the new key to the existing keys.txt
-   cat age-personal.key >> ~/.config/sops/age/keys.txt
-   rm age-personal.key
+   age-keygen -o ~/.config/sops/age/keys.txt
    ```
 
-4. Add the public keys from `age-personal.key` and `age-homelab.key` to `.sops.yaml` in `creation_rules.age`.
+3. Create an Age key pair for the cluster
+
+   ```bash
+   # We named the cluster "homelab" in the k0sctl.yaml file, so we will name the key accordingly
+   age-keygen -o sops/homelab.key
+   ```
+
+4. Add the public keys from `sops/homelab.key` and `~/.config/sops/age/keys.txt` to `.sops.yaml` in `creation_rules.age`.
 
 5. Deploy the Sops keys (the one for the cluster) to the cluster:
 
@@ -83,9 +93,7 @@ Here are the main components (to be updated):
    kubectl create namespace flux-system
    kubectl create secret generic sops-age \
       --namespace=flux-system \
-      --from-file=age.agekey=age-homelab.key
-   # You can now delete the local age-homelab.key file for security
-   rm age-homelab.key
+      --from-file=age.agekey=sops/homelab.key
    ```
 
 6. Recreate the secret files in `flux/clusters/homelab/cluster-secret-vars.yaml` using Sops:
@@ -104,7 +112,7 @@ Here are the main components (to be updated):
    git push origin main
    ```
 
-### 3. Flux Setup
+### 4. Flux Setup
 
 1. Install Flux namespace, operator and CRDs:
 

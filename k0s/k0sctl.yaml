@@ -9,14 +9,14 @@ spec:
         address: munchkin0.internal
         user: redbean
         port: 22
-        keyPath: ./keys/homelab
+        keyPath: ./k0s/keys/homelab
       role: controller+worker
       noTaints: true
     - ssh:
         address: munchkin1.internal
         user: redbean
         port: 22
-        keyPath: ./keys/homelab
+        keyPath: ./k0s/keys/homelab
       role: controller+worker
       noTaints: true
   k0s:
@@ -42,3 +42,38 @@ spec:
       taint: k0sctl.k0sproject.io/evict=true
       effect: NoExecute
       controllerWorkers: false
+---
+apiVersion: k0s.k0sproject.io/v1beta1
+kind: ClusterConfig
+metadata:
+  name: k0s
+spec:
+  api:
+    k0sApiPort: 9443
+    port: 6443
+  installConfig:
+    users:
+      etcdUser: etcd
+      kineUser: kube-apiserver
+      konnectivityUser: konnectivity-server
+      kubeAPIserverUser: kube-apiserver
+      kubeSchedulerUser: kube-scheduler
+  konnectivity:
+    adminPort: 8133
+    agentPort: 8132
+  network:
+    kubeProxy:
+      disabled: true
+    podCIDR: 10.244.0.0/16
+    provider: custom
+    serviceCIDR: 10.96.0.0/12
+    dualStack:
+      enabled: true
+      IPv6podCIDR: 2a02:8424:8502:6d01:b133:2c50:5e0:0/108
+      IPv6serviceCIDR: a02:8424:8502:6d01:b133:2c50:5f0:0/108
+  podSecurityPolicy:
+    defaultPolicy: 00-k0s-privileged
+  storage:
+    type: etcd
+  telemetry:
+    enabled: true

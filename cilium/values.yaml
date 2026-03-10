@@ -1,0 +1,5 @@
+envoy:
+  enabled: false
+kubeProxyReplacement: true
+k8sServiceHost: "munchkin0.internal"
+k8sServicePort: 6443
