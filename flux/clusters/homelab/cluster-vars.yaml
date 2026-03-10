@@ -7,4 +7,5 @@ metadata:
     version: v2
 type: Opaque
 data:
-  load_balancer_ip_range: "192.168.1.243-192.168.1.253"
+  load_balancer_ip_range: "2a02:8424:8502:6d01:b133:2c50:5e4::/112"
+  sftpgo_domain: "sftpgo.local"
