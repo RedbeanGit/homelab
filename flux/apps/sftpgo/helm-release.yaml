@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sftpgo
+spec:
+  interval: 15m
+  timeout: 5m
+  chart:
+    spec:
+      chart: sftpgo
+      version: "0.42.0"
+      sourceRef:
+        kind: HelmRepository
+        name: sftpgo
+        namespace: flux-system
+      interval: 5m
+  releaseName: sftpgo
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Service
+              name: sftpgo
+            patch: |-
+              - op: add
+                path: /spec/ipFamilies
+                value:
+                  - IPv4
+                  - IPv6
+              - op: add
+                path: /spec/ipFamilyPolicy
+                value: PreferDualStack
+  values:
+    service:
+      type: LoadBalancer
+    ui:
+      ingress:
+        enabled: true
+        hosts:
+          - host: ${sftpgo_domain}
+            paths:
+              - path: /
+                pathType: Prefix

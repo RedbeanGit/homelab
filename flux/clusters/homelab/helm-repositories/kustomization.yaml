@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - ../../../helm-repositories/cilium.yaml
   - ../../../helm-repositories/metallb.yaml
-  - ../../../helm-repositories/ngrok.yaml
   - ../../../helm-repositories/prometheus-community.yaml
+  - ../../../helm-repositories/sftpgo.yaml
+  - ../../../helm-repositories/traefik.yaml

@@ -6,5 +6,4 @@ resources:
   - kube-prometheus-stack.yaml
   - metallb-ip-pools.yaml
   - metallb.yaml
-  - ngrok-operator.yaml
-  # - ngrok.yaml
+  - traefik.yaml
