@@ -29,6 +29,8 @@ spec:
     hubble:
       ui:
         enabled: true
+      relay:
+        enabled: true
     kubeProxyReplacement: true
     k8sServiceHost: "${kubeapi_server_host}"
     k8sServicePort: ${kubeapi_server_port:=6443}
