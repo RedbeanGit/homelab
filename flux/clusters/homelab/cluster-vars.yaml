@@ -7,5 +7,6 @@ metadata:
     version: v2
 type: Opaque
 data:
+  kubeapi_server_host: "munchkin0.internal"
   load_balancer_ip_range: "2a02:8424:8502:6d01:b133:2c50:5e4::/112"
   sftpgo_domain: "sftpgo.local"
