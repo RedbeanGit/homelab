@@ -64,13 +64,13 @@ spec:
   network:
     kubeProxy:
       disabled: true
-    podCIDR: 10.244.0.0/16
     provider: custom
+    podCIDR: 10.244.0.0/16
     serviceCIDR: 10.96.0.0/12
     dualStack:
       enabled: true
-      IPv6podCIDR: 2a02:8424:8502:6d01:b133:2c50:5e0:0/108
-      IPv6serviceCIDR: a02:8424:8502:6d01:b133:2c50:5f0:0/108
+      IPv6podCIDR: fd00::/108
+      IPv6serviceCIDR: fd01::/108
   podSecurityPolicy:
     defaultPolicy: 00-k0s-privileged
   storage:
