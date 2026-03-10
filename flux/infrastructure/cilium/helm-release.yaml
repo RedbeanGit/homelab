@@ -26,6 +26,9 @@ spec:
   values:
     envoy:
       enabled: false
+    hubble:
+      ui:
+        enabled: true
     kubeProxyReplacement: true
     k8sServiceHost: "${kubeapi_server_host}"
     k8sServicePort: ${kubeapi_server_port:=6443}
