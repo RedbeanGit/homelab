@@ -8,6 +8,7 @@ spec:
   path: ./flux/infrastructure/metallb-ip-pools
   targetNamespace: metallb-system
   prune: true
+  wait: true
   sourceRef:
     kind: GitRepository
     name: homelab

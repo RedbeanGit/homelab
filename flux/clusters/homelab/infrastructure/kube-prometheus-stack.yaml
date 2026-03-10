@@ -8,6 +8,7 @@ spec:
   path: ./flux/infrastructure/kube-prometheus-stack
   targetNamespace: monitoring
   prune: true
+  wait: true
   sourceRef:
     kind: GitRepository
     name: homelab
